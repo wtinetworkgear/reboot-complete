@@ -14,19 +14,19 @@ https://galaxy.ansible.com/wti/remote
 
 In your Ansible hosts file, these parameters need be defined to talk to a WTI PDU
 
-**These parameters are mandatory:**
-wti_device, wti_username, wti_password, wti_plug
+**These parameters are mandatory:**<br/>
+wti_device, wti_username, wti_password, wti_plug<br/>
 
-**These parameters are optional:**
-wti_use_https, wti_validate_certs:
+**These parameters are optional:**<br/>
+wti_use_https, wti_validate_certs:<br/>
 
-**Examples are as follows:**
-wti_device: test.wti.com
-wti_username: super
-wti_password: super
-wti_plug: "5"
-wti_use_https: true 
-wti_validate_certs: true 
+**Examples are as follows:**<br/>
+wti_device: test.wti.com<br/>
+wti_username: super<br/>
+wti_password: super<br/>
+wti_plug: "5"<br/>
+wti_use_https: true <br/>
+wti_validate_certs: true <br/>
 
 If any of the mandatory parameters are not defined, then the WTI PDU reboot portion is skipped.
 
