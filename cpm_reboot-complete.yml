@@ -1,0 +1,43 @@
+# ansible-playbook ./cpm_wait.yml
+# will reboot a Linux machine and wait for it to return
+# if it did not return hard reboot with WTI Plug reboot
+- name: Get Device Parameters
+  hosts: pi_ipsecserver
+#  hosts: linux_csgo
+#  hosts: wti_rest
+#  hosts: linux_crate
+  gather_facts: False
+  vars:
+      do_hard_reboot: 1
+
+  tasks:
+#    - name: Do something that requires a reboot when it results in a change.
+    - name: Reboot block
+      block:
+        - name: See if the device is up.
+          wait_for_connection:
+            connect_timeout: 20
+            sleep: 5
+            delay: 5
+            timeout: 300
+
+        - name: Device is up, Start Reboot command
+          reboot:
+            reboot_timeout: 1200
+        - name: Soft Reboot Completed 
+          ansible.builtin.debug:
+            msg: 'The Linux Machine rebooted as expected.'
+      rescue:
+        - name: There was a problem, lets hard reboot
+          connection: local
+          collections: wti.remote
+          cpm_plugcontrol:
+            cpm_action: "setplugcontrol"
+            cpm_url: "{{wti_device}}"
+            cpm_username: "{{wti_username}}"
+            cpm_password: "{{wti_password}}"
+            use_https: "{{wti_use_https}}"
+            validate_certs: "{{wti_validate_certs}}"
+            plug_id: "{{wti_plug}}"
+            plug_state: "boot"
+          when: wti_device is defined and wti_username is defined and wti_username is defined and wti_username is defined
