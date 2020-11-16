@@ -1,4 +1,4 @@
-# ansible-playbook ./cpm_wait.yml
+# ansible-playbook ./cpm_reboot-complete.yml
 # will reboot a Linux machine and wait for it to return
 # if it did not return hard reboot with WTI Plug reboot
 - name: Get Device Parameters
